@@ -30,4 +30,42 @@ public class ProduitService {
             throw new Exception("Le produit existe déjà.");
         }
     }
+
+    // Obtenir un produit par son ID
+    public Produit obtenirProduitParId(Long id) throws Exception {
+        verifierProduitExistenceParId(id);
+        return produits.get(id);
+    }
+
+    // Obtenir un produit par son nom
+    public Produit obtenirProduitParNom(String nom) throws Exception {
+        verifierProduitExistenceParNom(nom);
+        return produits.values().stream()
+                .filter(produit -> produit.getNom().equals(nom))
+                .findFirst()
+                .orElse(null);
+    }
+
+        // Vérifier l'existence d'un produit par son ID
+    private void verifierProduitExistenceParId(Long id) throws Exception {
+        if (!produits.containsKey(id)) {
+            throw new Exception("Le produit avec l'ID " + id + " n'existe pas.");
+        }
+    }
+
+    // Vérifier l'existence d'un produit par son nom
+    private void verifierProduitExistenceParNom(String nom) throws Exception {
+        if (!produitExisteParNom(nom)) {
+            throw new Exception("Aucun produit avec le nom " + nom + " n'a été trouvé.");
+        }
+    }
+
+    // Vérifier l'existence d'un produit par son nom
+    private boolean produitExisteParNom(String nom) {
+        return produits.values().stream().anyMatch(produit -> produit.getNom().equals(nom));
+    }
+
+
+
+
 }
