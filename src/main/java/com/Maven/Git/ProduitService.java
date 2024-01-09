@@ -72,5 +72,10 @@ public class ProduitService {
         produits.put(produit.getId(), produit);
     }
 
+      // Supprimer un produit
+    public void supprimerProduit(Long id) throws Exception {
+        verifierProduitExistenceParId(id);
+        produits.remove(id);
+    }
 
 }
