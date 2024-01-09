@@ -65,7 +65,12 @@ public class ProduitService {
         return produits.values().stream().anyMatch(produit -> produit.getNom().equals(nom));
     }
 
-
+     // Modifier un produit
+    public void modifierProduit(Produit produit) throws Exception {
+        validerProduit(produit);
+        verifierProduitExistenceParId(produit.getId());
+        produits.put(produit.getId(), produit);
+    }
 
 
 }
